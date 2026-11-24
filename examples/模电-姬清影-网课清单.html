@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>【姬清影_】《模拟电子技术基础》学习待办清单</title>
+<style>
+:root{
+  --ink:#111; --ink-2:#555; --line:#b9b9b9; --line-strong:#111; --paper:#fff;
+  --accent:#2a6249;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:#efefed;
+  color:var(--ink);
+  font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",system-ui,sans-serif;
+  font-size:13px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  padding:28px 14px 60px;
+}
+.sheet{
+  width:860px; max-width:100%; margin:0 auto; background:var(--paper);
+  padding:44px 52px 40px; box-shadow:0 1px 2px rgba(0,0,0,.08),0 12px 32px rgba(0,0,0,.06);
+}
+.head{text-align:center;margin-bottom:22px}
+h1{margin:0 0 8px;font-size:22px;line-height:1.35;font-weight:700;letter-spacing:.2px}
+.meta{margin:0;font-size:12.5px;color:var(--ink-2)}
+.hint{margin:8px 0 0;font-size:12px;color:#888}
+.rule{height:2px;background:var(--ink);margin:18px 0 0}
+
+.bar-wrap{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  margin:16px 0 14px;padding:10px 12px;border:1px solid #e2e2e2;background:#fafafa;
+}
+.stat{font-size:12.5px;color:var(--ink);white-space:nowrap}
+.stat b{font-weight:700;color:var(--accent)}
+.track{flex:1 1 160px;height:6px;background:#e3e3e3;position:relative;min-width:120px}
+.fill{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--accent);transition:width .18s ease}
+.acts{display:flex;gap:8px}
+button{
+  font:inherit;font-size:12px;padding:5px 12px;border:1px solid var(--ink);
+  background:var(--ink);color:#fff;cursor:pointer;border-radius:2px;
+}
+button.ghost{background:#fff;color:var(--ink)}
+button:hover{opacity:.85}
+
+table{width:100%;border-collapse:collapse;margin-top:4px;font-variant-numeric:tabular-nums}
+col.c-no{width:6%}
+col.c-name{width:43%}
+col.c-time{width:9%}
+col.c-cum{width:17%}
+col.c-chk{width:8%}
+col.c-doneat{width:17%}
+th{
+  font-size:12px;font-weight:700;padding:9px 5px;border:1px solid var(--line-strong);
+  background:#fff;line-height:1.35;
+}
+td{border:1px solid var(--line);padding:7px 8px;vertical-align:middle}
+td.c-no,td.c-time,td.c-cum,td.c-chk,td.c-doneat{text-align:center}
+tbody tr.item:hover{background:#f7f7f7}
+
+tr.ch td{
+  border-top:1.6px solid var(--line-strong);border-bottom:1px solid var(--line-strong);
+  padding:10px 8px;font-weight:700;font-size:13.5px;
+}
+.ch-meta{font-weight:400;color:var(--ink-2);font-size:12px;margin-left:10px}
+.ch-prog{float:right;font-weight:400;font-size:11.5px;color:#8a8a8a;letter-spacing:.3px}
+.ch-prog.has{color:var(--accent)}
+
+tr.done .c-name,tr.done .c-time,tr.done .c-cum,tr.done .c-no{color:#adadad}
+
+.done-at{font-size:12px;color:var(--accent);font-variant-numeric:tabular-nums;letter-spacing:.2px}
+
+input[type=checkbox]{
+  appearance:none;-webkit-appearance:none;width:15px;height:15px;margin:0;
+  border:1.4px solid var(--ink);background:#fff;cursor:pointer;position:relative;vertical-align:middle;
+  transition:border-color .12s ease;
+}
+input[type=checkbox]:hover{border-color:var(--accent)}
+input[type=checkbox]:checked{border-color:var(--accent)}
+input[type=checkbox]:checked::after{
+  content:"";position:absolute;left:4px;top:1px;width:4px;height:8px;
+  border:solid var(--accent);border-width:0 1.6px 1.6px 0;transform:rotate(42deg);
+}
+
+.foot{margin:16px 0 0;font-size:11px;line-height:1.7;color:#777}
+
+@media (max-width:720px){
+  body{padding:12px 0 40px}
+  .sheet{padding:24px 16px}
+  h1{font-size:18px}
+  table{font-size:12px}
+  td{padding:6px 5px}
+  .ch-meta{display:block;margin:2px 0 0}
+  .ch-prog{float:none;display:block}
+}
+
+@media print{
+  @page{size:A4 portrait;margin:14mm 12mm}
+  :root{--accent:#111}
+  body{background:#fff;padding:0;font-size:10.5pt}
+  .sheet{width:auto;max-width:none;margin:0;padding:0;box-shadow:none}
+  .no-print{display:none !important}
+  h1{font-size:16pt}
+  table{font-size:9.5pt}
+  th{padding:6px 4px}
+  td{padding:4.5px 5px}
+  tbody tr{break-inside:avoid;page-break-inside:avoid}
+  tr.ch{break-after:avoid;page-break-after:avoid}
+  thead{display:table-header-group}
+  tr.ch td{padding:7px 5px}
+  .foot{margin-top:10px}
+  input:focus{outline:none}
+}
+</style>
+</head>
+<body>
+<div class="sheet">
+  <header class="head">
+    <h1>【姬清影_】《模拟电子技术基础》学习待办清单</h1>
+    <p class="meta">UP主：姬清影_｜超详细版（共 164 讲，总时长 92 小时 30 分）</p>
+    <p class="hint no-print">点“完成”列打勾，右侧会自动记下打勾时间；取消勾选则清除。进度保存在本机浏览器，可直接打印或另存为 PDF。</p>
+    <div class="rule"></div>
+  </header>
+
+  <div class="bar-wrap no-print">
+    <span class="stat" id="stat">已学 <b>0</b> / 164 讲 · <b>0 分钟</b> / 92 小时 30 分</span>
+    <span class="track"><span class="fill" id="fill"></span></span>
+    <span class="acts">
+      <button id="printBtn">打印 / 存为 PDF</button>
+      <button id="resetBtn" class="ghost">清空记录</button>
+    </span>
+  </div>
+
+  <table>
+    <colgroup>
+      <col class="c-no"><col class="c-name"><col class="c-time">
+      <col class="c-cum"><col class="c-chk"><col class="c-doneat">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>编号</th>
+        <th>课程内容</th>
+        <th>时长</th>
+        <th>本章累计<br>（到本节上完）</th>
+        <th>完成</th>
+        <th>完成时间</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr class="ch"><td colspan="6"><span class="ch-name">课程说明（预备）</span><span class="ch-meta">共 2 讲 · 22 分钟</span><span class="ch-prog" data-chprog="0">0 / 2</span></td></tr>
+<tr class="item" data-ch="0" data-sec="680"><td class="c-no">1</td><td class="c-name">对本课程的说明</td><td class="c-time">11:20</td><td class="c-cum">11 min</td><td class="c-chk"><input type="checkbox" aria-label="第 1 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="0" data-sec="645"><td class="c-no">2</td><td class="c-name">引言</td><td class="c-time">10:45</td><td class="c-cum">22 min</td><td class="c-chk"><input type="checkbox" aria-label="第 2 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="ch"><td colspan="6"><span class="ch-name">第1章　常用半导体器件</span><span class="ch-meta">共 16 讲 · 8 小时 14 分</span><span class="ch-prog" data-chprog="1">0 / 16</span></td></tr>
+<tr class="item" data-ch="1" data-sec="2306"><td class="c-no">3</td><td class="c-name">本征半导体、杂质半导体</td><td class="c-time">38:26</td><td class="c-cum">38 min</td><td class="c-chk"><input type="checkbox" aria-label="第 3 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="1" data-sec="3379"><td class="c-no">4</td><td class="c-name">PN结的形成与半导体二极管</td><td class="c-time">56:19</td><td class="c-cum">1 h 34 min</td><td class="c-chk"><input type="checkbox" aria-label="第 4 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="1" data-sec="2055"><td class="c-no">5</td><td class="c-name">二极管微变等效电路</td><td class="c-time">34:15</td><td class="c-cum">2 h 9 min</td><td class="c-chk"><input type="checkbox" aria-label="第 5 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="1" data-sec="1897"><td class="c-no">6</td><td class="c-name">稳压二极管</td><td class="c-time">31:37</td><td class="c-cum">2 h 40 min</td><td class="c-chk"><input type="checkbox" aria-label="第 6 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="1" data-sec="250"><td class="c-no">7</td><td class="c-name">例1.2.3</td><td class="c-time">4:10</td><td class="c-cum">2 h 44 min</td><td class="c-chk"><input type="checkbox" aria-label="第 7 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="1" data-sec="209"><td class="c-no">8</td><td class="c-name">例1.2.4</td><td class="c-time">3:29</td><td class="c-cum">2 h 48 min</td><td class="c-chk"><input type="checkbox" aria-label="第 8 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="1" data-sec="3002"><td class="c-no">9</td><td class="c-name">三极管的结构以及电流放大倍数</td><td class="c-time">50:02</td><td class="c-cum">3 h 38 min</td><td class="c-chk"><input type="checkbox" aria-label="第 9 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="1" data-sec="1958"><td class="c-no">10</td><td class="c-name">三极管特性曲线（第一部分）</td><td class="c-time">32:38</td><td class="c-cum">4 h 10 min</td><td class="c-chk"><input type="checkbox" aria-label="第 10 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="1" data-sec="3400"><td class="c-no">11</td><td class="c-name">三极管特性曲线（第二部分）</td><td class="c-time">56:40</td><td class="c-cum">5 h 7 min</td><td class="c-chk"><input type="checkbox" aria-label="第 11 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="1" data-sec="351"><td class="c-no">12</td><td class="c-name">例1.3.1</td><td class="c-time">5:51</td><td class="c-cum">5 h 13 min</td><td class="c-chk"><input type="checkbox" aria-label="第 12 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="1" data-sec="5092"><td class="c-no">13</td><td class="c-name">N沟道增强型场效应管</td><td class="c-time">84:52</td><td class="c-cum">6 h 38 min</td><td class="c-chk"><input type="checkbox" aria-label="第 13 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="1" data-sec="488"><td class="c-no">14</td><td class="c-name">例1.4.2</td><td class="c-time">8:08</td><td class="c-cum">6 h 46 min</td><td class="c-chk"><input type="checkbox" aria-label="第 14 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="1" data-sec="2600"><td class="c-no">15</td><td class="c-name">N沟道耗尽型场效应管</td><td class="c-time">43:20</td><td class="c-cum">7 h 29 min</td><td class="c-chk"><input type="checkbox" aria-label="第 15 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="1" data-sec="1729"><td class="c-no">16</td><td class="c-name">结型场效应管完结</td><td class="c-time">28:49</td><td class="c-cum">7 h 58 min</td><td class="c-chk"><input type="checkbox" aria-label="第 16 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="1" data-sec="191"><td class="c-no">17</td><td class="c-name">例1.4.3</td><td class="c-time">3:11</td><td class="c-cum">8 h 1 min</td><td class="c-chk"><input type="checkbox" aria-label="第 17 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="1" data-sec="771"><td class="c-no">18</td><td class="c-name">场效应管的跨导</td><td class="c-time">12:51</td><td class="c-cum">8 h 14 min</td><td class="c-chk"><input type="checkbox" aria-label="第 18 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="ch"><td colspan="6"><span class="ch-name">第2章　基本放大电路</span><span class="ch-meta">共 24 讲 · 13 小时 4 分</span><span class="ch-prog" data-chprog="2">0 / 24</span></td></tr>
+<tr class="item" data-ch="2" data-sec="1092"><td class="c-no">19</td><td class="c-name">放大的基本概念</td><td class="c-time">18:12</td><td class="c-cum">18 min</td><td class="c-chk"><input type="checkbox" aria-label="第 19 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="2" data-sec="1675"><td class="c-no">20</td><td class="c-name">构成一个放大电路的思路</td><td class="c-time">27:55</td><td class="c-cum">46 min</td><td class="c-chk"><input type="checkbox" aria-label="第 20 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="2" data-sec="1152"><td class="c-no">21</td><td class="c-name">为什么要设置静态工作点</td><td class="c-time">19:12</td><td class="c-cum">1 h 5 min</td><td class="c-chk"><input type="checkbox" aria-label="第 21 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="2" data-sec="2876"><td class="c-no">22</td><td class="c-name">两种实用放大电路</td><td class="c-time">47:56</td><td class="c-cum">1 h 53 min</td><td class="c-chk"><input type="checkbox" aria-label="第 22 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="2" data-sec="2769"><td class="c-no">23</td><td class="c-name">直流通路与交流通路</td><td class="c-time">46:09</td><td class="c-cum">2 h 39 min</td><td class="c-chk"><input type="checkbox" aria-label="第 23 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="2" data-sec="1491"><td class="c-no">24</td><td class="c-name">图解法求解静态工作点</td><td class="c-time">24:51</td><td class="c-cum">3 h 4 min</td><td class="c-chk"><input type="checkbox" aria-label="第 24 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="2" data-sec="1164"><td class="c-no">25</td><td class="c-name">图解法分析电压放大倍数</td><td class="c-time">19:24</td><td class="c-cum">3 h 23 min</td><td class="c-chk"><input type="checkbox" aria-label="第 25 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="2" data-sec="2048"><td class="c-no">26</td><td class="c-name">图解法直观看交流</td><td class="c-time">34:08</td><td class="c-cum">3 h 57 min</td><td class="c-chk"><input type="checkbox" aria-label="第 26 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="2" data-sec="2379"><td class="c-no">27</td><td class="c-name">h 参数等效模型</td><td class="c-time">39:39</td><td class="c-cum">4 h 37 min</td><td class="c-chk"><input type="checkbox" aria-label="第 27 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="2" data-sec="2088"><td class="c-no">28</td><td class="c-name">输入输出电阻含义以及放大电路分析</td><td class="c-time">34:48</td><td class="c-cum">5 h 12 min</td><td class="c-chk"><input type="checkbox" aria-label="第 28 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="2" data-sec="700"><td class="c-no">29</td><td class="c-name">例2.3.2</td><td class="c-time">11:40</td><td class="c-cum">5 h 23 min</td><td class="c-chk"><input type="checkbox" aria-label="第 29 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="2" data-sec="1833"><td class="c-no">30</td><td class="c-name">静态工作点的稳定</td><td class="c-time">30:33</td><td class="c-cum">5 h 54 min</td><td class="c-chk"><input type="checkbox" aria-label="第 30 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="2" data-sec="1809"><td class="c-no">31</td><td class="c-name">静态工作点稳定电路 Q 点的计算</td><td class="c-time">30:09</td><td class="c-cum">6 h 24 min</td><td class="c-chk"><input type="checkbox" aria-label="第 31 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="2" data-sec="2539"><td class="c-no">32</td><td class="c-name">静态工作点稳定电路动态参数计算</td><td class="c-time">42:19</td><td class="c-cum">7 h 6 min</td><td class="c-chk"><input type="checkbox" aria-label="第 32 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="2" data-sec="2909"><td class="c-no">33</td><td class="c-name">共集放大电路的分析</td><td class="c-time">48:29</td><td class="c-cum">7 h 55 min</td><td class="c-chk"><input type="checkbox" aria-label="第 33 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="2" data-sec="2779"><td class="c-no">34</td><td class="c-name">共基放大电路的分析</td><td class="c-time">46:19</td><td class="c-cum">8 h 41 min</td><td class="c-chk"><input type="checkbox" aria-label="第 34 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="2" data-sec="567"><td class="c-no">35</td><td class="c-name">三极管构成的三种放大电路小总结</td><td class="c-time">9:27</td><td class="c-cum">8 h 51 min</td><td class="c-chk"><input type="checkbox" aria-label="第 35 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="2" data-sec="1843"><td class="c-no">36</td><td class="c-name">场效应管小信号模型怎么来的？</td><td class="c-time">30:43</td><td class="c-cum">9 h 21 min</td><td class="c-chk"><input type="checkbox" aria-label="第 36 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="2" data-sec="3459"><td class="c-no">37</td><td class="c-name">共源放大电路的分析</td><td class="c-time">57:39</td><td class="c-cum">10 h 19 min</td><td class="c-chk"><input type="checkbox" aria-label="第 37 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="2" data-sec="4274"><td class="c-no">38</td><td class="c-name">共源放大电路的变种</td><td class="c-time">71:14</td><td class="c-cum">11 h 30 min</td><td class="c-chk"><input type="checkbox" aria-label="第 38 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="2" data-sec="1846"><td class="c-no">39</td><td class="c-name">共漏放大电路的分析</td><td class="c-time">30:46</td><td class="c-cum">12 h 1 min</td><td class="c-chk"><input type="checkbox" aria-label="第 39 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="2" data-sec="1491"><td class="c-no">40</td><td class="c-name">复合管</td><td class="c-time">24:51</td><td class="c-cum">12 h 26 min</td><td class="c-chk"><input type="checkbox" aria-label="第 40 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="2" data-sec="324"><td class="c-no">41</td><td class="c-name">复合管（补）</td><td class="c-time">5:24</td><td class="c-cum">12 h 31 min</td><td class="c-chk"><input type="checkbox" aria-label="第 41 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="2" data-sec="1982"><td class="c-no">42</td><td class="c-name">复合管放大电路与共射共基放大电路</td><td class="c-time">33:02</td><td class="c-cum">13 h 4 min</td><td class="c-chk"><input type="checkbox" aria-label="第 42 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="ch"><td colspan="6"><span class="ch-name">第3章　多级放大电路</span><span class="ch-meta">共 13 讲 · 8 小时 54 分</span><span class="ch-prog" data-chprog="3">0 / 13</span></td></tr>
+<tr class="item" data-ch="3" data-sec="1311"><td class="c-no">43</td><td class="c-name">放大电路建模以及为什么需要多级放大电路</td><td class="c-time">21:51</td><td class="c-cum">21 min</td><td class="c-chk"><input type="checkbox" aria-label="第 43 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="3" data-sec="2543"><td class="c-no">44</td><td class="c-name">直接耦合多级放大电路</td><td class="c-time">42:23</td><td class="c-cum">1 h 4 min</td><td class="c-chk"><input type="checkbox" aria-label="第 44 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="3" data-sec="988"><td class="c-no">45</td><td class="c-name">阻容耦合多级放大电路</td><td class="c-time">16:28</td><td class="c-cum">1 h 20 min</td><td class="c-chk"><input type="checkbox" aria-label="第 45 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="3" data-sec="1876"><td class="c-no">46</td><td class="c-name">多级放大电路动态分析</td><td class="c-time">31:16</td><td class="c-cum">1 h 51 min</td><td class="c-chk"><input type="checkbox" aria-label="第 46 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="3" data-sec="3874"><td class="c-no">47</td><td class="c-name">多级放大电路实例</td><td class="c-time">64:34</td><td class="c-cum">2 h 56 min</td><td class="c-chk"><input type="checkbox" aria-label="第 47 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="3" data-sec="3065"><td class="c-no">48</td><td class="c-name">差分放大电路共模增益</td><td class="c-time">51:05</td><td class="c-cum">3 h 47 min</td><td class="c-chk"><input type="checkbox" aria-label="第 48 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="3" data-sec="2574"><td class="c-no">49</td><td class="c-name">差分放大电路差模增益</td><td class="c-time">42:54</td><td class="c-cum">4 h 30 min</td><td class="c-chk"><input type="checkbox" aria-label="第 49 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="3" data-sec="3851"><td class="c-no">50</td><td class="c-name">差分放大电路分析实例</td><td class="c-time">64:11</td><td class="c-cum">5 h 34 min</td><td class="c-chk"><input type="checkbox" aria-label="第 50 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="3" data-sec="2520"><td class="c-no">51</td><td class="c-name">单端输出电路静态工作点的求解</td><td class="c-time">42:00</td><td class="c-cum">6 h 16 min</td><td class="c-chk"><input type="checkbox" aria-label="第 51 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="3" data-sec="2889"><td class="c-no">52</td><td class="c-name">单端输出电路增益求解</td><td class="c-time">48:09</td><td class="c-cum">7 h 4 min</td><td class="c-chk"><input type="checkbox" aria-label="第 52 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="3" data-sec="1839"><td class="c-no">53</td><td class="c-name">单入双出电路分析</td><td class="c-time">30:39</td><td class="c-cum">7 h 35 min</td><td class="c-chk"><input type="checkbox" aria-label="第 53 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="3" data-sec="2699"><td class="c-no">54</td><td class="c-name">单入单出电路分析</td><td class="c-time">44:59</td><td class="c-cum">8 h 20 min</td><td class="c-chk"><input type="checkbox" aria-label="第 54 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="3" data-sec="2043"><td class="c-no">55</td><td class="c-name">差分放大电路的改进与完结</td><td class="c-time">34:03</td><td class="c-cum">8 h 54 min</td><td class="c-chk"><input type="checkbox" aria-label="第 55 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="ch"><td colspan="6"><span class="ch-name">第4章　集成运算放大电路</span><span class="ch-meta">共 11 讲 · 4 小时 31 分</span><span class="ch-prog" data-chprog="4">0 / 11</span></td></tr>
+<tr class="item" data-ch="4" data-sec="1859"><td class="c-no">56</td><td class="c-name">镜像电流源</td><td class="c-time">30:59</td><td class="c-cum">30 min</td><td class="c-chk"><input type="checkbox" aria-label="第 56 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="4" data-sec="2498"><td class="c-no">57</td><td class="c-name">比例电流源</td><td class="c-time">41:38</td><td class="c-cum">1 h 12 min</td><td class="c-chk"><input type="checkbox" aria-label="第 57 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="4" data-sec="736"><td class="c-no">58</td><td class="c-name">微电流源</td><td class="c-time">12:16</td><td class="c-cum">1 h 24 min</td><td class="c-chk"><input type="checkbox" aria-label="第 58 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="4" data-sec="664"><td class="c-no">59</td><td class="c-name">改进的镜像电流源电路</td><td class="c-time">11:04</td><td class="c-cum">1 h 35 min</td><td class="c-chk"><input type="checkbox" aria-label="第 59 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="4" data-sec="1169"><td class="c-no">60</td><td class="c-name">威尔逊电流源</td><td class="c-time">19:29</td><td class="c-cum">1 h 55 min</td><td class="c-chk"><input type="checkbox" aria-label="第 60 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="4" data-sec="1105"><td class="c-no">61</td><td class="c-name">多集电极电流源与场效应管电流源</td><td class="c-time">18:25</td><td class="c-cum">2 h 13 min</td><td class="c-chk"><input type="checkbox" aria-label="第 61 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="4" data-sec="1447"><td class="c-no">62</td><td class="c-name">有源负载共射放大电路与有源负载差分放大电路</td><td class="c-time">24:07</td><td class="c-cum">2 h 37 min</td><td class="c-chk"><input type="checkbox" aria-label="第 62 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="4" data-sec="1351"><td class="c-no">63</td><td class="c-name">直接耦合互补输出级</td><td class="c-time">22:31</td><td class="c-cum">3 h 0 min</td><td class="c-chk"><input type="checkbox" aria-label="第 63 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="4" data-sec="1859"><td class="c-no">64</td><td class="c-name">直接耦合互补输出级1</td><td class="c-time">30:59</td><td class="c-cum">3 h 31 min</td><td class="c-chk"><input type="checkbox" aria-label="第 64 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="4" data-sec="1920"><td class="c-no">65</td><td class="c-name">直接耦合互补输出级2</td><td class="c-time">32:00</td><td class="c-cum">4 h 3 min</td><td class="c-chk"><input type="checkbox" aria-label="第 65 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="4" data-sec="1678"><td class="c-no">66</td><td class="c-name">集成运放的构成及电压传输特性</td><td class="c-time">27:58</td><td class="c-cum">4 h 31 min</td><td class="c-chk"><input type="checkbox" aria-label="第 66 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="ch"><td colspan="6"><span class="ch-name">第5章　放大电路的频率响应</span><span class="ch-meta">共 21 讲 · 13 小时 7 分</span><span class="ch-prog" data-chprog="5">0 / 21</span></td></tr>
+<tr class="item" data-ch="5" data-sec="1120"><td class="c-no">67</td><td class="c-name">复数回顾</td><td class="c-time">18:40</td><td class="c-cum">18 min</td><td class="c-chk"><input type="checkbox" aria-label="第 67 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="5" data-sec="604"><td class="c-no">68</td><td class="c-name">uo 除 ui 意味着什么？</td><td class="c-time">10:04</td><td class="c-cum">28 min</td><td class="c-chk"><input type="checkbox" aria-label="第 68 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="5" data-sec="2258"><td class="c-no">69</td><td class="c-name">高通电路频率响应</td><td class="c-time">37:38</td><td class="c-cum">1 h 6 min</td><td class="c-chk"><input type="checkbox" aria-label="第 69 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="5" data-sec="2079"><td class="c-no">70</td><td class="c-name">低通电路频率响应</td><td class="c-time">34:39</td><td class="c-cum">1 h 41 min</td><td class="c-chk"><input type="checkbox" aria-label="第 70 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="5" data-sec="2029"><td class="c-no">71</td><td class="c-name">波特图</td><td class="c-time">33:49</td><td class="c-cum">2 h 14 min</td><td class="c-chk"><input type="checkbox" aria-label="第 71 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="5" data-sec="2243"><td class="c-no">72</td><td class="c-name">波特图续1</td><td class="c-time">37:23</td><td class="c-cum">2 h 52 min</td><td class="c-chk"><input type="checkbox" aria-label="第 72 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="5" data-sec="2948"><td class="c-no">73</td><td class="c-name">波特图续2</td><td class="c-time">49:08</td><td class="c-cum">3 h 41 min</td><td class="c-chk"><input type="checkbox" aria-label="第 73 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="5" data-sec="412"><td class="c-no">74</td><td class="c-name">为什么会有高频模型？</td><td class="c-time">6:52</td><td class="c-cum">3 h 48 min</td><td class="c-chk"><input type="checkbox" aria-label="第 74 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="5" data-sec="3007"><td class="c-no">75</td><td class="c-name">三极管高频模型</td><td class="c-time">50:07</td><td class="c-cum">4 h 38 min</td><td class="c-chk"><input type="checkbox" aria-label="第 75 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="5" data-sec="1823"><td class="c-no">76</td><td class="c-name">三极管高频模型1</td><td class="c-time">30:23</td><td class="c-cum">5 h 8 min</td><td class="c-chk"><input type="checkbox" aria-label="第 76 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="5" data-sec="3435"><td class="c-no">77</td><td class="c-name">三极管电流放大倍数频率响应</td><td class="c-time">57:15</td><td class="c-cum">6 h 5 min</td><td class="c-chk"><input type="checkbox" aria-label="第 77 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="5" data-sec="2994"><td class="c-no">78</td><td class="c-name">三极管电流放大倍数频率响应续</td><td class="c-time">49:54</td><td class="c-cum">6 h 55 min</td><td class="c-chk"><input type="checkbox" aria-label="第 78 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="5" data-sec="1975"><td class="c-no">79</td><td class="c-name">场效应管高频模型</td><td class="c-time">32:55</td><td class="c-cum">7 h 28 min</td><td class="c-chk"><input type="checkbox" aria-label="第 79 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="5" data-sec="2042"><td class="c-no">80</td><td class="c-name">共射放大电路频率响应：中频分析</td><td class="c-time">34:02</td><td class="c-cum">8 h 2 min</td><td class="c-chk"><input type="checkbox" aria-label="第 80 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="5" data-sec="2086"><td class="c-no">81</td><td class="c-name">共射放大电路频率响应：低频分析</td><td class="c-time">34:46</td><td class="c-cum">8 h 37 min</td><td class="c-chk"><input type="checkbox" aria-label="第 81 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="5" data-sec="2291"><td class="c-no">82</td><td class="c-name">共射放大电路频率响应：高频分析</td><td class="c-time">38:11</td><td class="c-cum">9 h 15 min</td><td class="c-chk"><input type="checkbox" aria-label="第 82 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="5" data-sec="2961"><td class="c-no">83</td><td class="c-name">共射放大电路全频段表达式与波特图</td><td class="c-time">49:21</td><td class="c-cum">10 h 5 min</td><td class="c-chk"><input type="checkbox" aria-label="第 83 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="5" data-sec="3057"><td class="c-no">84</td><td class="c-name">共源放大电路频率响应</td><td class="c-time">50:57</td><td class="c-cum">10 h 56 min</td><td class="c-chk"><input type="checkbox" aria-label="第 84 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="5" data-sec="3407"><td class="c-no">85</td><td class="c-name">增益带宽积</td><td class="c-time">56:47</td><td class="c-cum">11 h 52 min</td><td class="c-chk"><input type="checkbox" aria-label="第 85 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="5" data-sec="2163"><td class="c-no">86</td><td class="c-name">多级放大电路频率响应</td><td class="c-time">36:03</td><td class="c-cum">12 h 28 min</td><td class="c-chk"><input type="checkbox" aria-label="第 86 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="5" data-sec="2341"><td class="c-no">87</td><td class="c-name">多级放大电路频率响应续</td><td class="c-time">39:01</td><td class="c-cum">13 h 7 min</td><td class="c-chk"><input type="checkbox" aria-label="第 87 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="ch"><td colspan="6"><span class="ch-name">第6章　放大电路中的反馈</span><span class="ch-meta">共 21 讲 · 11 小时 22 分</span><span class="ch-prog" data-chprog="6">0 / 21</span></td></tr>
+<tr class="item" data-ch="6" data-sec="2003"><td class="c-no">88</td><td class="c-name">反馈的基本概念</td><td class="c-time">33:23</td><td class="c-cum">33 min</td><td class="c-chk"><input type="checkbox" aria-label="第 88 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="6" data-sec="1535"><td class="c-no">89</td><td class="c-name">有无反馈的判断</td><td class="c-time">25:35</td><td class="c-cum">58 min</td><td class="c-chk"><input type="checkbox" aria-label="第 89 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="6" data-sec="2897"><td class="c-no">90</td><td class="c-name">正负反馈的判断</td><td class="c-time">48:17</td><td class="c-cum">1 h 47 min</td><td class="c-chk"><input type="checkbox" aria-label="第 90 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="6" data-sec="1313"><td class="c-no">91</td><td class="c-name">交直流反馈的判断</td><td class="c-time">21:53</td><td class="c-cum">2 h 9 min</td><td class="c-chk"><input type="checkbox" aria-label="第 91 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="6" data-sec="2112"><td class="c-no">92</td><td class="c-name">反馈组态</td><td class="c-time">35:12</td><td class="c-cum">2 h 44 min</td><td class="c-chk"><input type="checkbox" aria-label="第 92 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="6" data-sec="2076"><td class="c-no">93</td><td class="c-name">反馈组态1</td><td class="c-time">34:36</td><td class="c-cum">3 h 18 min</td><td class="c-chk"><input type="checkbox" aria-label="第 93 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="6" data-sec="1892"><td class="c-no">94</td><td class="c-name">组态判断例题</td><td class="c-time">31:32</td><td class="c-cum">3 h 50 min</td><td class="c-chk"><input type="checkbox" aria-label="第 94 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="6" data-sec="2114"><td class="c-no">95</td><td class="c-name">负反馈放大电路的框图</td><td class="c-time">35:14</td><td class="c-cum">4 h 25 min</td><td class="c-chk"><input type="checkbox" aria-label="第 95 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="6" data-sec="2935"><td class="c-no">96</td><td class="c-name">深度负反馈放大电路放大倍数的分析</td><td class="c-time">48:55</td><td class="c-cum">5 h 14 min</td><td class="c-chk"><input type="checkbox" aria-label="第 96 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="6" data-sec="1224"><td class="c-no">97</td><td class="c-name">深度负反馈放大电路放大倍数的分析续</td><td class="c-time">20:24</td><td class="c-cum">5 h 35 min</td><td class="c-chk"><input type="checkbox" aria-label="第 97 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="6" data-sec="1768"><td class="c-no">98</td><td class="c-name">四种组态的框图</td><td class="c-time">29:28</td><td class="c-cum">6 h 4 min</td><td class="c-chk"><input type="checkbox" aria-label="第 98 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="6" data-sec="1979"><td class="c-no">99</td><td class="c-name">反馈放大电路中对放大倍数符号的解释</td><td class="c-time">32:59</td><td class="c-cum">6 h 37 min</td><td class="c-chk"><input type="checkbox" aria-label="第 99 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="6" data-sec="1939"><td class="c-no">100</td><td class="c-name">放大倍数求解例题</td><td class="c-time">32:19</td><td class="c-cum">7 h 9 min</td><td class="c-chk"><input type="checkbox" aria-label="第 100 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="6" data-sec="976"><td class="c-no">101</td><td class="c-name">负反馈稳定放大倍数</td><td class="c-time">16:16</td><td class="c-cum">7 h 26 min</td><td class="c-chk"><input type="checkbox" aria-label="第 101 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="6" data-sec="1747"><td class="c-no">102</td><td class="c-name">负反馈对输入电阻的影响</td><td class="c-time">29:07</td><td class="c-cum">7 h 55 min</td><td class="c-chk"><input type="checkbox" aria-label="第 102 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="6" data-sec="1583"><td class="c-no">103</td><td class="c-name">负反馈对输出电阻的影响</td><td class="c-time">26:23</td><td class="c-cum">8 h 21 min</td><td class="c-chk"><input type="checkbox" aria-label="第 103 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="6" data-sec="2174"><td class="c-no">104</td><td class="c-name">负反馈对输出电阻的影响续</td><td class="c-time">36:14</td><td class="c-cum">8 h 57 min</td><td class="c-chk"><input type="checkbox" aria-label="第 104 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="6" data-sec="1728"><td class="c-no">105</td><td class="c-name">负反馈对电路带宽的影响</td><td class="c-time">28:48</td><td class="c-cum">9 h 26 min</td><td class="c-chk"><input type="checkbox" aria-label="第 105 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="6" data-sec="870"><td class="c-no">106</td><td class="c-name">自激振荡</td><td class="c-time">14:30</td><td class="c-cum">9 h 41 min</td><td class="c-chk"><input type="checkbox" aria-label="第 106 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="6" data-sec="3198"><td class="c-no">107</td><td class="c-name">自激振荡续</td><td class="c-time">53:18</td><td class="c-cum">10 h 34 min</td><td class="c-chk"><input type="checkbox" aria-label="第 107 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="6" data-sec="2888"><td class="c-no">108</td><td class="c-name">怎么让电路不自激振荡</td><td class="c-time">48:08</td><td class="c-cum">11 h 22 min</td><td class="c-chk"><input type="checkbox" aria-label="第 108 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="ch"><td colspan="6"><span class="ch-name">第7章　信号的运算和处理</span><span class="ch-meta">共 17 讲 · 8 小时 24 分</span><span class="ch-prog" data-chprog="7">0 / 17</span></td></tr>
+<tr class="item" data-ch="7" data-sec="2851"><td class="c-no">109</td><td class="c-name">反相比例运算电路</td><td class="c-time">47:31</td><td class="c-cum">47 min</td><td class="c-chk"><input type="checkbox" aria-label="第 109 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="7" data-sec="2500"><td class="c-no">110</td><td class="c-name">反相比例运算电路改进和同相比例运算电路</td><td class="c-time">41:40</td><td class="c-cum">1 h 29 min</td><td class="c-chk"><input type="checkbox" aria-label="第 110 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="7" data-sec="663"><td class="c-no">111</td><td class="c-name">反相求和运算电路</td><td class="c-time">11:03</td><td class="c-cum">1 h 40 min</td><td class="c-chk"><input type="checkbox" aria-label="第 111 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="7" data-sec="1902"><td class="c-no">112</td><td class="c-name">同相求和运算电路</td><td class="c-time">31:42</td><td class="c-cum">2 h 11 min</td><td class="c-chk"><input type="checkbox" aria-label="第 112 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="7" data-sec="2566"><td class="c-no">113</td><td class="c-name">加减运算电路</td><td class="c-time">42:46</td><td class="c-cum">2 h 54 min</td><td class="c-chk"><input type="checkbox" aria-label="第 113 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="7" data-sec="1082"><td class="c-no">114</td><td class="c-name">积分运算电路</td><td class="c-time">18:02</td><td class="c-cum">3 h 12 min</td><td class="c-chk"><input type="checkbox" aria-label="第 114 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="7" data-sec="1011"><td class="c-no">115</td><td class="c-name">微分运算电路</td><td class="c-time">16:51</td><td class="c-cum">3 h 29 min</td><td class="c-chk"><input type="checkbox" aria-label="第 115 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="7" data-sec="1460"><td class="c-no">116</td><td class="c-name">微积分运算电路两道例题</td><td class="c-time">24:20</td><td class="c-cum">3 h 53 min</td><td class="c-chk"><input type="checkbox" aria-label="第 116 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="7" data-sec="2667"><td class="c-no">117</td><td class="c-name">对数运算电路</td><td class="c-time">44:27</td><td class="c-cum">4 h 38 min</td><td class="c-chk"><input type="checkbox" aria-label="第 117 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="7" data-sec="446"><td class="c-no">118</td><td class="c-name">指数运算电路</td><td class="c-time">7:26</td><td class="c-cum">4 h 45 min</td><td class="c-chk"><input type="checkbox" aria-label="第 118 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="7" data-sec="1069"><td class="c-no">119</td><td class="c-name">利用对数、指数运算电路构成乘法运算电路</td><td class="c-time">17:49</td><td class="c-cum">5 h 3 min</td><td class="c-chk"><input type="checkbox" aria-label="第 119 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="7" data-sec="2534"><td class="c-no">120</td><td class="c-name">模拟乘法器</td><td class="c-time">42:14</td><td class="c-cum">5 h 45 min</td><td class="c-chk"><input type="checkbox" aria-label="第 120 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="7" data-sec="1250"><td class="c-no">121</td><td class="c-name">滤波电路预备知识</td><td class="c-time">20:50</td><td class="c-cum">6 h 6 min</td><td class="c-chk"><input type="checkbox" aria-label="第 121 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="7" data-sec="2280"><td class="c-no">122</td><td class="c-name">低通滤波电路</td><td class="c-time">38:00</td><td class="c-cum">6 h 44 min</td><td class="c-chk"><input type="checkbox" aria-label="第 122 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="7" data-sec="2971"><td class="c-no">123</td><td class="c-name">同相输入低通滤波器</td><td class="c-time">49:31</td><td class="c-cum">7 h 34 min</td><td class="c-chk"><input type="checkbox" aria-label="第 123 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="7" data-sec="1442"><td class="c-no">124</td><td class="c-name">反相输入低通滤波器</td><td class="c-time">24:02</td><td class="c-cum">7 h 58 min</td><td class="c-chk"><input type="checkbox" aria-label="第 124 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="7" data-sec="1598"><td class="c-no">125</td><td class="c-name">全通滤波器</td><td class="c-time">26:38</td><td class="c-cum">8 h 24 min</td><td class="c-chk"><input type="checkbox" aria-label="第 125 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="ch"><td colspan="6"><span class="ch-name">第8章　波形的产生和信号的转换</span><span class="ch-meta">共 25 讲 · 15 小时 15 分</span><span class="ch-prog" data-chprog="8">0 / 25</span></td></tr>
+<tr class="item" data-ch="8" data-sec="1981"><td class="c-no">126</td><td class="c-name">正弦波震荡电路概述</td><td class="c-time">33:01</td><td class="c-cum">33 min</td><td class="c-chk"><input type="checkbox" aria-label="第 126 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="8" data-sec="3259"><td class="c-no">127</td><td class="c-name">RC 正弦波震荡电路</td><td class="c-time">54:19</td><td class="c-cum">1 h 27 min</td><td class="c-chk"><input type="checkbox" aria-label="第 127 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="8" data-sec="3128"><td class="c-no">128</td><td class="c-name">LC 震荡电路</td><td class="c-time">52:08</td><td class="c-cum">2 h 19 min</td><td class="c-chk"><input type="checkbox" aria-label="第 128 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="8" data-sec="2444"><td class="c-no">129</td><td class="c-name">LC 震荡电路1</td><td class="c-time">40:44</td><td class="c-cum">3 h 0 min</td><td class="c-chk"><input type="checkbox" aria-label="第 129 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="8" data-sec="2230"><td class="c-no">130</td><td class="c-name">LC 震荡电路2</td><td class="c-time">37:10</td><td class="c-cum">3 h 37 min</td><td class="c-chk"><input type="checkbox" aria-label="第 130 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="8" data-sec="1935"><td class="c-no">131</td><td class="c-name">LC 震荡电路3</td><td class="c-time">32:15</td><td class="c-cum">4 h 9 min</td><td class="c-chk"><input type="checkbox" aria-label="第 131 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="8" data-sec="2365"><td class="c-no">132</td><td class="c-name">LC 震荡电路4</td><td class="c-time">39:25</td><td class="c-cum">4 h 49 min</td><td class="c-chk"><input type="checkbox" aria-label="第 132 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="8" data-sec="3323"><td class="c-no">133</td><td class="c-name">石英晶体震荡电路</td><td class="c-time">55:23</td><td class="c-cum">5 h 44 min</td><td class="c-chk"><input type="checkbox" aria-label="第 133 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="8" data-sec="1099"><td class="c-no">134</td><td class="c-name">石英晶体震荡电路续</td><td class="c-time">18:19</td><td class="c-cum">6 h 2 min</td><td class="c-chk"><input type="checkbox" aria-label="第 134 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="8" data-sec="1815"><td class="c-no">135</td><td class="c-name">比较器</td><td class="c-time">30:15</td><td class="c-cum">6 h 32 min</td><td class="c-chk"><input type="checkbox" aria-label="第 135 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="8" data-sec="1484"><td class="c-no">136</td><td class="c-name">单限比较器</td><td class="c-time">24:44</td><td class="c-cum">6 h 57 min</td><td class="c-chk"><input type="checkbox" aria-label="第 136 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="8" data-sec="2422"><td class="c-no">137</td><td class="c-name">滞回比较器</td><td class="c-time">40:22</td><td class="c-cum">7 h 38 min</td><td class="c-chk"><input type="checkbox" aria-label="第 137 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="8" data-sec="1260"><td class="c-no">138</td><td class="c-name">窗口比较器</td><td class="c-time">21:00</td><td class="c-cum">7 h 59 min</td><td class="c-chk"><input type="checkbox" aria-label="第 138 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="8" data-sec="2185"><td class="c-no">139</td><td class="c-name">方波发生电路</td><td class="c-time">36:25</td><td class="c-cum">8 h 35 min</td><td class="c-chk"><input type="checkbox" aria-label="第 139 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="8" data-sec="2454"><td class="c-no">140</td><td class="c-name">方波发生电路续</td><td class="c-time">40:54</td><td class="c-cum">9 h 16 min</td><td class="c-chk"><input type="checkbox" aria-label="第 140 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="8" data-sec="2728"><td class="c-no">141</td><td class="c-name">矩形波发生电路</td><td class="c-time">45:28</td><td class="c-cum">10 h 1 min</td><td class="c-chk"><input type="checkbox" aria-label="第 141 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="8" data-sec="3493"><td class="c-no">142</td><td class="c-name">三角波发生电路</td><td class="c-time">58:13</td><td class="c-cum">11 h 0 min</td><td class="c-chk"><input type="checkbox" aria-label="第 142 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="8" data-sec="1591"><td class="c-no">143</td><td class="c-name">三角波发生电路续</td><td class="c-time">26:31</td><td class="c-cum">11 h 26 min</td><td class="c-chk"><input type="checkbox" aria-label="第 143 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="8" data-sec="3465"><td class="c-no">144</td><td class="c-name">锯齿波发生电路</td><td class="c-time">57:45</td><td class="c-cum">12 h 24 min</td><td class="c-chk"><input type="checkbox" aria-label="第 144 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="8" data-sec="1103"><td class="c-no">145</td><td class="c-name">三角波变锯齿波变正弦波</td><td class="c-time">18:23</td><td class="c-cum">12 h 42 min</td><td class="c-chk"><input type="checkbox" aria-label="第 145 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="8" data-sec="2369"><td class="c-no">146</td><td class="c-name">电压转电流与电流转电压</td><td class="c-time">39:29</td><td class="c-cum">13 h 22 min</td><td class="c-chk"><input type="checkbox" aria-label="第 146 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="8" data-sec="1318"><td class="c-no">147</td><td class="c-name">精密整流电路</td><td class="c-time">21:58</td><td class="c-cum">13 h 44 min</td><td class="c-chk"><input type="checkbox" aria-label="第 147 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="8" data-sec="1748"><td class="c-no">148</td><td class="c-name">精密整流电路续</td><td class="c-time">29:08</td><td class="c-cum">14 h 13 min</td><td class="c-chk"><input type="checkbox" aria-label="第 148 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="8" data-sec="1607"><td class="c-no">149</td><td class="c-name">电压-频率转换电路</td><td class="c-time">26:47</td><td class="c-cum">14 h 40 min</td><td class="c-chk"><input type="checkbox" aria-label="第 149 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="8" data-sec="2122"><td class="c-no">150</td><td class="c-name">电压-频率转换电路2</td><td class="c-time">35:22</td><td class="c-cum">15 h 15 min</td><td class="c-chk"><input type="checkbox" aria-label="第 150 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="ch"><td colspan="6"><span class="ch-name">第9章　功率放大电路</span><span class="ch-meta">共 4 讲 · 2 小时 39 分</span><span class="ch-prog" data-chprog="9">0 / 4</span></td></tr>
+<tr class="item" data-ch="9" data-sec="2681"><td class="c-no">151</td><td class="c-name">功率放大电路</td><td class="c-time">44:41</td><td class="c-cum">44 min</td><td class="c-chk"><input type="checkbox" aria-label="第 151 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="9" data-sec="2900"><td class="c-no">152</td><td class="c-name">功率放大电路续</td><td class="c-time">48:20</td><td class="c-cum">1 h 33 min</td><td class="c-chk"><input type="checkbox" aria-label="第 152 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="9" data-sec="2184"><td class="c-no">153</td><td class="c-name">功率放大电路续1</td><td class="c-time">36:24</td><td class="c-cum">2 h 9 min</td><td class="c-chk"><input type="checkbox" aria-label="第 153 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="9" data-sec="1789"><td class="c-no">154</td><td class="c-name">功率放大电路续2</td><td class="c-time">29:49</td><td class="c-cum">2 h 39 min</td><td class="c-chk"><input type="checkbox" aria-label="第 154 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="ch"><td colspan="6"><span class="ch-name">第10章　直流电源</span><span class="ch-meta">共 10 讲 · 6 小时 33 分</span><span class="ch-prog" data-chprog="10">0 / 10</span></td></tr>
+<tr class="item" data-ch="10" data-sec="1482"><td class="c-no">155</td><td class="c-name">半波整流电路</td><td class="c-time">24:42</td><td class="c-cum">24 min</td><td class="c-chk"><input type="checkbox" aria-label="第 155 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="10" data-sec="3124"><td class="c-no">156</td><td class="c-name">全波整流电路</td><td class="c-time">52:04</td><td class="c-cum">1 h 16 min</td><td class="c-chk"><input type="checkbox" aria-label="第 156 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="10" data-sec="3132"><td class="c-no">157</td><td class="c-name">电容滤波电路</td><td class="c-time">52:12</td><td class="c-cum">2 h 8 min</td><td class="c-chk"><input type="checkbox" aria-label="第 157 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="10" data-sec="1414"><td class="c-no">158</td><td class="c-name">倍压整流电路</td><td class="c-time">23:34</td><td class="c-cum">2 h 32 min</td><td class="c-chk"><input type="checkbox" aria-label="第 158 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="10" data-sec="1455"><td class="c-no">159</td><td class="c-name">电感滤波电路</td><td class="c-time">24:15</td><td class="c-cum">2 h 56 min</td><td class="c-chk"><input type="checkbox" aria-label="第 159 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="10" data-sec="2861"><td class="c-no">160</td><td class="c-name">稳压管稳压电路</td><td class="c-time">47:41</td><td class="c-cum">3 h 44 min</td><td class="c-chk"><input type="checkbox" aria-label="第 160 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="10" data-sec="2796"><td class="c-no">161</td><td class="c-name">稳压管稳压电路2</td><td class="c-time">46:36</td><td class="c-cum">4 h 31 min</td><td class="c-chk"><input type="checkbox" aria-label="第 161 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="10" data-sec="2367"><td class="c-no">162</td><td class="c-name">集成稳压电路</td><td class="c-time">39:27</td><td class="c-cum">5 h 10 min</td><td class="c-chk"><input type="checkbox" aria-label="第 162 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="10" data-sec="3301"><td class="c-no">163</td><td class="c-name">开关型稳压电路</td><td class="c-time">55:01</td><td class="c-cum">6 h 5 min</td><td class="c-chk"><input type="checkbox" aria-label="第 163 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+<tr class="item" data-ch="10" data-sec="1651"><td class="c-no">164</td><td class="c-name">开关型稳压电路续</td><td class="c-time">27:31</td><td class="c-cum">6 h 33 min</td><td class="c-chk"><input type="checkbox" aria-label="第 164 讲 完成"></td><td class="c-doneat"><span class="done-at"></span></td></tr>
+    </tbody>
+  </table>
+
+  <p class="foot">本清单依据 B 站视频 BV1tuXaYrELq（UP主：姬清影_，《模拟电子技术基础》超详细版，全 166 个分P）整理，章节按教材知识结构归纳，原视频未提供官方章节；已略去“插曲”（51 秒）与“结语”（31 秒）两个非教学分P。“本章累计”为该节上完后本章累计已学时长。</p>
+</div>
+<script>
+var CONFIG_ID = 'BV1tuXaYrELq';
+
+(function(){
+  var KEY = 'checklist:' + CONFIG_ID;
+  var rows = Array.prototype.slice.call(document.querySelectorAll('tr.item'));
+  var totalN = rows.length;
+  var totalSec = rows.reduce(function(a, r){ return a + parseInt(r.dataset.sec, 10); }, 0);
+  var statEl = document.getElementById('stat');
+  var fillEl = document.getElementById('fill');
+  var chEls = {};
+
+  function fmtSum(sec){
+    var m = Math.floor(sec / 60), h = Math.floor(m / 60), mm = m % 60;
+    return h ? (h + ' 小时 ' + mm + ' 分') : (mm + ' 分钟');
+  }
+
+  function load(){
+    try { return JSON.parse(localStorage.getItem(KEY) || '{}'); }
+    catch(e){ return {}; }
+  }
+  function save(s){
+    try { localStorage.setItem(KEY, JSON.stringify(s)); } catch(e){}
+  }
+  function pad(n){ return n < 10 ? '0' + n : '' + n; }
+  function nowStr(){
+    var d = new Date();
+    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) +
+           ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes());
+  }
+
+  var state = load();
+
+  function apply(){
+    var doneN = 0, doneSec = 0, perCh = {};
+    rows.forEach(function(r, i){
+      var rec = state[i] || {};
+      var box = r.querySelector('input[type=checkbox]');
+      var when = r.querySelector('.done-at');
+      box.checked = !!rec.done;
+      when.textContent = rec.done ? (rec.doneAt || '') : '';
+      r.classList.toggle('done', box.checked);
+      var ch = r.dataset.ch;
+      perCh[ch] = perCh[ch] || {n:0, d:0};
+      perCh[ch].n++;
+      if (box.checked){
+        doneN++;
+        doneSec += parseInt(r.dataset.sec, 10);
+        perCh[ch].d++;
+      }
+    });
+    statEl.innerHTML = '已学 <b>' + doneN + '</b> / ' + totalN + ' 讲 · ' +
+      '<b>' + fmtSum(doneSec) + '</b> / ' + fmtSum(totalSec);
+    fillEl.style.width = (totalN ? (doneN / totalN * 100) : 0).toFixed(1) + '%';
+    Object.keys(chEls).forEach(function(k){
+      var p = perCh[k] || {n:0, d:0};
+      chEls[k].textContent = p.d + ' / ' + p.n;
+      chEls[k].classList.toggle('has', p.d > 0);
+    });
+  }
+
+  rows.forEach(function(r, i){
+    var box = r.querySelector('input[type=checkbox]');
+    box.addEventListener('change', function(){
+      if (box.checked){
+        state[i] = {done: true, doneAt: nowStr()};
+      } else {
+        delete state[i];
+      }
+      save(state);
+      apply();
+    });
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-chprog]'), function(el){
+    chEls[el.dataset.chprog] = el;
+  });
+
+  document.getElementById('printBtn').addEventListener('click', function(){ window.print(); });
+  document.getElementById('resetBtn').addEventListener('click', function(){
+    if (!confirm('清空所有打勾记录和完成时间？')) return;
+    state = {};
+    save(state);
+    rows.forEach(function(r){
+      r.querySelector('input[type=checkbox]').checked = false;
+    });
+    apply();
+  });
+
+  apply();
+})();
+
+</script>
+</body>
+</html>
